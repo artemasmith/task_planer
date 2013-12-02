@@ -1,0 +1,6 @@
+var PlansVM = function () {
+    var self = this;
+    this.plans = ko.observableArray();
+}
+
+ko.applyBindings(new PlansVM(), document.findElementById('allplans'))
