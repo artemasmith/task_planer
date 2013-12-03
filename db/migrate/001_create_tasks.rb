@@ -8,6 +8,8 @@ class CreateTasks < ActiveRecord::Migration
       t.datetime :finish_time
       t.datetime :aquaiant_time
       t.boolean :status
+      
+      t.timestamps
     end
 #    add_index :tasks, :id_user
 #    add_index :tasks, [:task, :id_user]

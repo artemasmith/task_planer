@@ -1,2 +1,22 @@
-%ul#allplans{"data-bind"=> "foreach: plans"}
-  %li{"data-bind" => "value: title"}
+#allplans
+  %table.table.table-striped
+    %tr.header
+      %th= t :id
+      %th= t :owner
+      %th= t :performer
+      %th= t :department
+      %th= t :created
+      %td
+    %tbody{"data-bind"=> "foreach: plans"}
+      %tr
+        %td{"data-bind" => "text: id"}
+        %td{"data-bind" => "text: owner"}
+        %td{"data-bind" => "text: performer"}
+        %td{"data-bind" => "text: department"}
+        %td{"data-bind" => "text: created"}
+        %td
+          %button{"data-bind" => "click: showPlan, visible: isAdmin"}= t :show
+          %button{"data-bind" => "click: editPlan, visible: isAdmin"}= t :edit
+          %button{"data-bind" => "click: deletePlan, visible: isAdmin"}= t :delete
+  %button{"data-bind"=> "click: createPlan"}=t :create
+=will_paginate @plans

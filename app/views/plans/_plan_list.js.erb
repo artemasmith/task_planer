@@ -1,6 +1,17 @@
+var Plan = function(data) {
+    this.task = data.task;
+    this.owner = data.owner;
+    this.performer = data.performer;
+    this.department = data.department;
+    this.scan = data.scan_path;
+}
 var PlansVM = function () {
     var self = this;
-    this.plans = ko.observableArray();
+    this.plans = ko.observableArray([]);
+    <% Plan.all.each do |p|%>
+	this.plans.push(new Plan({task: '<%=p.task%>', owner: '<%=p.id_owner %>', performer: '<%=p.id_performer %>', department: '<%=p.id_department %>', scan: '<%= scan_path%>'}))
+    <% end%>
 }
 
 ko.applyBindings(new PlansVM(), document.findElementById('allplans'))
+
