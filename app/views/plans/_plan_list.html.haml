@@ -11,15 +11,15 @@
     - @plans.each do |p|
       %tr{id: p.id}
         %td= p.id
-        %td= p.id_owner
-        %td= p.id_performer
-        %td= p.id_department
+        %td= User.find(p.id_owner.to_i)
+        %td= User.find(p.id_performer.to_i)
+        %td= Department.find(p.id_department.to_i).title
         %td= p.created_at
         %td
           %button{"onclick"=> "showPlan()"}= t :show
           %button{"onclick"=> "editPlan()"}= t :edit
           %button{"onclick"=> "deletePlan()"}= t :delete
-  =link_to t('new plan'), new_plan_path, class: 'btn'
+  =link_to t('new plan'), new_plan_path(project_id: params[:project_id]), class: 'btn'
 %script
   = render 'plan_list.js'
 =will_paginate @plans if @plans

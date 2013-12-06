@@ -1,0 +1,14 @@
+=form_for @plan  do |f|
+  =f.hidden_field :id_owner, value: session[:user_id]
+  =f.hidden_field :project_id, value: params[:project_id]
+  %table#create_form.table
+    %tr
+      %th= t :performer
+      %td
+        =f.select :id_performer, options_for_select(get_possible_performers(params[:project_id],session[:user_id]))
+    %tr
+      %th= t :department
+      %td
+        =f.select :id_department, options_for_select(get_departments())
+  =f.submit :save
+

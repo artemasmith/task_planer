@@ -1,0 +1,12 @@
+=form_for @department do |f|
+  %table.table.table-bordered
+    %tr
+      %th= t :title
+      %td
+        =f.text_field :title
+    %tr
+      %th= t :group
+      %td
+        =f.select :id_group, options_for_select(Group.all.map{|g| [g.name, g.id]})
+  =f.submit t('save')
+

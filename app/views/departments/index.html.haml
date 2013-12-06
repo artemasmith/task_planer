@@ -1,0 +1,17 @@
+%h2= t :departments
+=render 'stylesheets'
+%table.table.table-bordered
+  %tr
+    %th= t :department_name
+    %th= t :group_name
+    %th= t :members
+    %td
+  - @departments.each do |d|
+    %tr
+      %td= d.title
+      %td= Group.find(d.id_group).name
+      %td= Group.find(d.id_group).users.map{|m| m.name}.join(', ')
+      %td
+        =link_to t('delete'), department_path(d.id), method: 'delete', class: 'btn'
+        =link_to t('edit'), edit_department_path(d.id), class: 'btn'
+=link_to t('new_department'), new_department_path()

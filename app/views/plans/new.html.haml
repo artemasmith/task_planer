@@ -1,11 +1,3 @@
+=render 'stylesheets'
 %h2= t :create_new_plan
-=form_for @plan, url: {action: 'create'} do |f|
-  %table#create_form.table
-    %tr
-      %th= t :owner
-      %td
-        =f.text_field :id_owner 
-    %tr
-      %th= t :department
-      %td
-        =f.text_field :id_department
+=render 'form', plan: @plan

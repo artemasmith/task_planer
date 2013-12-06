@@ -3,3 +3,5 @@
 resources :plans
 resources :tasks
 resources :patterns
+get '/departments', to: 'departments#index'
+resources :departments

@@ -1,7 +1,7 @@
 class PlansController < ApplicationController
   unloadable
   require 'will_paginate/array'
-  before_filter :find_plan, only: [:show, :edit, :destroy, :create]
+  before_filter :find_project
 
 
   def index
@@ -14,14 +14,15 @@ class PlansController < ApplicationController
   def create
     @plan = Plan.new
     attributes = [:id_owner, :id_performer, :id_department, :scan]
-    attributes.each {|a| @plan[a]=params[a]}
+    attributes.each {|a| @plan[a]=params[:plan][a]}
     @plan.save
-    
-    respond_to do |format|
-	format.html {redirect plans_path(project_id: params[:project_id])}
-	format.json {render @plan}
+    if !@plan.errors.blank?
+	@plan.error.each {|e| flash[:error]+=e.to_s }
     end
-#    render json: @plan
+    respond_to do |format|
+	format.html {redirect_to plans_path(project_id: params[:plan][:project_id])}
+	format.json {render json: @plan.attributes}
+    end
   end
 
   def new
@@ -36,9 +37,13 @@ class PlansController < ApplicationController
   
   private
   
-  def find_plan
-    id = params[:id]
-    id = params[:id_plan] if id.blank?
-    @plan ||= Plan.find(id)
+  def find_project
+    if params[:plan]
+      id = params[:plan][:project_id]
+    else
+      id = params[:project_id]
+    end
+    @project = Project.find_by_identifier(id)
+    @project
   end
 end

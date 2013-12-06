@@ -1,0 +1,12 @@
+%h2= t :show_department
+=render 'stylesheets'
+%table.table.table-bordered
+  %tr
+    %th= t :title
+    %th= t :group
+    %th= t :members
+  %tr
+    %td= @department.title
+    %td= @group.name
+    %td= @members
+=link_to :departments, departments_path
