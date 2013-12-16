@@ -1,4 +1,13 @@
-var showPlan = function(){alert('show')};
-var deletePlan = function() {alert('delete')};
-var editPlan = function(){alert('edit')};
-var createPlan = function(){alert('create')};
+var deletePlan = function(e) {
+  var id = e.parentNode.parentNode.id;
+  var data = {id: id, project_id: '<%= params[:project_id]%>'};
+  $.ajax({
+    type: 'DELETE',
+    dataType: 'JSON',
+    url: 'plans/'+id+'?project_id=<%= params[:project_id] %>', 
+    data: data,
+    success: function() {
+      $('#'+id).hide()
+    }
+    });    
+}

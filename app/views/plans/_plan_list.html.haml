@@ -16,11 +16,11 @@
         %td= Department.find(p.id_department.to_i).title
         %td= p.created_at
         %td
-          %button{"onclick"=> "showPlan()"}= t :show
-          %button{"onclick"=> "editPlan()"}= t :edit
-          %button{"onclick"=> "deletePlan()"}= t :delete
+          =link_to t('show'), plan_path(id: p.id, project_id: params[:project_id]), class: 'btn'
+          =link_to t('edit'), edit_plan_path(id: p.id, project_id: params[:project_id]), class: 'btn'
+          %button{ "onclick" => "deletePlan(this)", class: 'btn' }= t :delete
   =link_to t('new plan'), new_plan_path(project_id: params[:project_id]), class: 'btn'
 %script
-  = render 'plan_list.js'
+  =render 'plan_list.js'
 =will_paginate @plans if @plans
 

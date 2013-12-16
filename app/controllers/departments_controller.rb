@@ -12,7 +12,7 @@ class DepartmentsController < ApplicationController
     @department[:title] = params[:department][:title]
     @department.save
     respond_to do |format|
-     format.html {redirect_to departments_path}
+      format.html { redirect_to departments_path }
     end
   end
 
@@ -29,18 +29,18 @@ class DepartmentsController < ApplicationController
   end
   
   def update
-    @department[:id_group]=params[:department][:id_group]
-    @department[:title]=params[:department][:title]
+    @department[:id_group] = params[:department][:id_group]
+    @department[:title] = params[:department][:title]
     @department.save
     respond_to do |format|
-      format.html {redirect_to departments_path}
+      format.html { redirect_to departments_path }
     end
   end
 
   def destroy
     @department.delete
     respond_to do |format|
-      format.html {redirect_to departments_path}
+      format.html { redirect_to departments_path }
     end    
   end
   

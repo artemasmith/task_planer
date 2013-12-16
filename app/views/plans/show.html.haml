@@ -1,1 +1,15 @@
-<h2>PlansController#show</h2>
+%h2= t :plans
+=render 'stylesheets'
+%table.table.table-bordered
+  %tr
+    %th= t :performer
+    %th= t :owner
+    %th= t :created_at
+    %th= t :scan
+  %tr
+    %td= @plan.id_performer
+    %td= @plan.id_owner
+    %td= @plan.created_at
+    %td= @plan.scan_path
+=link_to t('plans'), plans_path(project_id: params[:project_id]), class: 'btn'
+=link_to t('edit'), edit_plan_path(id: params[:id], project_id: params[:project_id]), class: 'btn'

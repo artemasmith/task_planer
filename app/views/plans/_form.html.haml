@@ -10,5 +10,5 @@
       %th= t :department
       %td
         =f.select :id_department, options_for_select(get_departments())
-  =f.submit :save
+  =f.submit :save, class: 'btn'
 
