@@ -1,0 +1,23 @@
+%table#task_list.table.table-bordered{style: 'width: 60%;'}
+  %tr
+    %th= t :task
+    %th= t :user
+    %th= t :status
+    %th= t :aquaiant_time
+    %th= t :plan_finish_time
+    %th= t :finish_time
+    %td
+  - @plan.tasks.each do |task|
+    %tr
+      %td= task.task
+      %td= task.user.name
+      %td= task.status
+      %td= task.aquaiant_time
+      %td= task.plan_finish_time
+      %td= task.finish_time
+      %td
+        - if have_permission?({ project_id: params[:project_id], user_id: session[:user_id], permission: :change_tasks  })
+          = link_to t('delete'), task_path(id: task.id, project_id: params[:project_id], id_plan: params[:id]), method: :delete, class: 'btn', confirm: 'Are you sure?'
+          %button{ onclick: 'editTask()' }= t :edit
+%script
+  =render 'task_list.js'

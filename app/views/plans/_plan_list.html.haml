@@ -14,12 +14,13 @@
         %td= User.find(p.id_owner.to_i)
         %td= User.find(p.id_performer.to_i)
         %td= Department.find(p.id_department.to_i).title
-        %td= p.created_at
+        %td= l p.created_at
         %td
           =link_to t('show'), plan_path(id: p.id, project_id: params[:project_id]), class: 'btn'
           =link_to t('edit'), edit_plan_path(id: p.id, project_id: params[:project_id]), class: 'btn'
-          %button{ "onclick" => "deletePlan(this)", class: 'btn' }= t :delete
-  =link_to t('new plan'), new_plan_path(project_id: params[:project_id]), class: 'btn'
+          /=button_to t('delete'), { url: task_path(id: p.id, project_id: params[:project_id], id_plan: params[:id]), method: :delete }
+          %button{onclick: 'deletePlan(this)'}= t :delete
+  =link_to t('new_plan'), new_plan_path(project_id: params[:project_id]), class: 'btn'
 %script
   =render 'plan_list.js'
 =will_paginate @plans if @plans

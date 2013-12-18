@@ -1,0 +1,26 @@
+=form_for :task, url: tasks_path do |f|
+  %table.table.table-bordered{style: 'width: 20%;'}
+    = f.hidden_field :id_plan, value: params[:id]
+    = f.hidden_field :project_id, value: params[:project_id]
+    %tr
+      %td
+        = f.label t :task
+      %td
+        = f.text_field :task
+    %tr
+      %td
+        = f.label t :performer
+      %td
+        = f.select :id_user, options_for_select(get_possible_performers(params[:project_id],0))
+    %tr
+      %td
+        = f.label t :plan_finish_time
+      %td
+        = f.date_select :plan_finish_time
+    %tr
+      %td
+        = f.label t :status
+      %td
+        = t :enabled
+        = f.check_box :status
+  = f.submit t('add'), class: 'btn', onclick: 'addTask()'

@@ -16,7 +16,20 @@ module PlansHelper
   
   def get_departments
     result = []
-    Department.all.each {|d| result << [d.title,d.id]}
+    Department.all.each { |d| result << [d.title,d.id] }
+    result
+  end
+  
+  #check if user have permission in the project
+  #data = {project_id:,user_id,permission}
+  def have_permission?(data)
+    result = false
+    User.find(data[:user_id]).roles_for_project(Project.find(data[:project_id])).each do |r|
+      if r.permissions.include?(data[:permission])
+        result = true
+        break
+      end
+    end
     result
   end
   

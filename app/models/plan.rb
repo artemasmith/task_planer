@@ -4,8 +4,8 @@ class Plan < ActiveRecord::Base
   validates :id_performer, presence: true
   
   belongs_to :department
-  belongs_to :owner, class_name: 'user', foreign_key: :id_owner
-  belongs_to :performer, class_name: 'user', foreign_key: :id_performer
-  has_many :report
-  has_many :task
+  belongs_to :owner, class_name: 'User', foreign_key: :id_owner
+  belongs_to :performer, class_name: 'User', foreign_key: :id_performer
+  has_many :reports,class_name: 'Report', foreign_key: :id_plan
+  has_many :tasks, class_name: 'Task', foreign_key: :id_plan
 end

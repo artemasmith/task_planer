@@ -5,5 +5,5 @@ class Task < ActiveRecord::Base
   validates :id_plan, presence: true
   
   belongs_to :plan
-  belongs_to :user
+  belongs_to :user, foreign_key: :id_user
 end
