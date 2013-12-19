@@ -1,5 +1,6 @@
 # English strings go here for Rails i18n
 ru:
+
   add: 'Добавить'
   plan_finish_time: 'Планируемое время выполнения'
   finish_time: 'Время выполнения'

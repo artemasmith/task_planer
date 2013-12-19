@@ -27,13 +27,17 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
     fields = [:id_user,:id_plan,:task, :status]
     fields.each {|f| @task[f]=params[:task][f] }
-    @task.plan_finish_time = Date.new(params[:task]['plan_finish_time(1i)'].to_i, params[:task]['plan_finish_time(2i)'].to_i, params[:task]['plan_finish_time(3i)'].to_i)
-    @task.finish_time = Date.new(params[:task]['finish_time(1i)'].to_i, params[:task]['finish_time(2i)'].to_i, params[:task]['finish_time(3i)'].to_i)
-    @task.aquaiant_time = Date.new(params[:task]['aquaiant_time(1i)'].to_i, params[:task]['aquaiant_time(2i)'].to_i, params[:task]['aquaiant_time(3i)'].to_i)
+    begin
+      @task.plan_finish_time = Date.new(params[:task]['plan_finish_time(1i)'].to_i, params[:task]['plan_finish_time(2i)'].to_i, params[:task]['plan_finish_time(3i)'].to_i)
+      @task.finish_time = Date.new(params[:task]['finish_time(1i)'].to_i, params[:task]['finish_time(2i)'].to_i, params[:task]['finish_time(3i)'].to_i)
+      @task.aquaiant_time = Date.new(params[:task]['aquaiant_time(1i)'].to_i, params[:task]['aquaiant_time(2i)'].to_i, params[:task]['aquaiant_time(3i)'].to_i)
+    rescue ArgumentError
+      flash[:error] = t :wrong_date
+    end
     @task.save
     respond_to do |format|
       format.html { redirect_to plan_path(id: params[:task][:id_plan], project_id: params[:project_id])  }
-      format.js
+      format.js {}
     end
     
   end

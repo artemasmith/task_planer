@@ -4,9 +4,9 @@ class CreateTasks < ActiveRecord::Migration
       t.integer :id_user
       t.integer :id_plan
       t.string :task
-      t.datetime :plan_finish_time
-      t.datetime :finish_time
-      t.datetime :aquaiant_time
+      t.date :plan_finish_time
+      t.date :finish_time
+      t.date :aquaiant_time
       t.boolean :status
       
       t.timestamps

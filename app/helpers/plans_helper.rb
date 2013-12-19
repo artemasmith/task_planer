@@ -33,4 +33,13 @@ module PlansHelper
     result
   end
   
+  def make_nice_time(date)
+    if date
+      date = date.to_s.split()[0] #.gsub!('-','.') if date
+      temp = date.split('-')
+      date = temp[2] + '.' + temp[1] + '.' + temp[0]
+    end
+    date
+  end
+  
 end

@@ -5,3 +5,23 @@ function addTask() {
 function reloadPage(){
   window.location.reload();
 }
+function editTask(event) {
+  event = event || window.event;
+  var id = event.target.parentElement.parentElement.id.split('_')[1];
+  var edit_forms = $('.edit_form');
+  for (i = 0; i < edit_forms.length; i++){
+    edit_forms[i].hidden = true;
+    tid = edit_forms[i].id.split('_')[1];
+    $("#show_" + tid).show();
+    $("#edit_" + tid).hide();
+  }
+  $("#edit_" + id).show();
+  $("#show_" + id).hide();
+}
+
+function afterEdit(event) {
+//  event = event || window.event;
+//  var id = event.target.parentElement.parentElement.id.split('_')[1];
+//  $("#edit_" + id).hide();
+//  $("#show_" + id).show();
+}
