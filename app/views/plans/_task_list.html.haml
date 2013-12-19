@@ -8,7 +8,7 @@
     %th= t :finish_time
     %td
   - @plan.tasks.each do |task|
-    %tr
+    %tr{id: "show_#{task.id}"}
       %td= task.task
       %td= task.user.name
       %td= task.status
@@ -18,6 +18,17 @@
       %td
         - if have_permission?({ project_id: params[:project_id], user_id: session[:user_id], permission: :change_tasks  })
           = link_to t('delete'), task_path(id: task.id, project_id: params[:project_id], id_plan: params[:id]), method: :delete, class: 'btn', confirm: 'Are you sure?'
-          %button{ onclick: 'editTask()' }= t :edit
+          %button{ onclick: 'editTask(this)', class: 'btn' }= t :edit
+    =form_for task, url: task_path(id: task.id, id_plan: params[:id], project_id: params[:project_id]), method: :put do |f|
+      %tr{id: "edit_#{task.id}"}
+        =f.hidden_field :id_plan, value: params[:id]
+        %td= f.text_field :task
+        %td= f.select :id_user, options_for_select(get_possible_performers(params[:project_id],0))
+        %td= f.check_box :status
+        %td= f.date_select :aquaiant_time
+        %td= f.date_select :plan_finish_time
+        %td= f.date_select :finish_time
+        %td= f.submit t('save'), class: 'btn'
+        
 %script
   =render 'task_list.js'
