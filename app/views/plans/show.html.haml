@@ -1,11 +1,14 @@
 %h2= t :plans
 %h3= t :basic_info
-=render 'stylesheets'
-- if have_permission?({ project_id: params[:project_id], user_id: session[:user_id], permission: :admin_plan })
-  =render 'basic_plan'
-  =link_to t('edit'), edit_plan_path(id: params[:id], project_id: params[:project_id]), class: 'btn'
+\=render 'stylesheets'
+\- if have_permission?({ project_id: params[:project_id], user_id: session[:user_id], permission: :admin_plan })
+\  =render 'basic_plan'
+\  =link_to t('edit'), edit_plan_path(id: params[:id], project_id: params[:project_id]), class: 'btn'
 %p
-  = render 'task_list', plan: @plan
+  - if have_permission?({ project_id: params[:project_id], user_id: session[:user_id], permission: :admin_plan })
+    = render 'task_list', plan: @plan
+  - else
+    = render 'task_list_performer', plan: @plan
 %p
   - if have_permission?({ project_id: params[:project_id], user_id: session[:user_id], permission: :change_tasks })
     = render 'add_task'

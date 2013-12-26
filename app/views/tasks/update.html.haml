@@ -1,0 +1,6 @@
+=params
+%p
+  =@task.finish_time
+  =@task.plan_finish_time
+  =@task.aquaiant_time
+  =Date.new(params[:task]['plan_finish_time(1i)'].to_i, params[:task]['plan_finish_time(2i)'].to_i, params[:task]['plan_finish_time(3i)'].to_i)

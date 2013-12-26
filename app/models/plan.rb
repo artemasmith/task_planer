@@ -8,4 +8,8 @@ class Plan < ActiveRecord::Base
   belongs_to :performer, class_name: 'User', foreign_key: :id_performer
   has_many :reports,class_name: 'Report', foreign_key: :id_plan
   has_many :tasks, class_name: 'Task', foreign_key: :id_plan
+  
+  def set_date()
+    
+  end
 end

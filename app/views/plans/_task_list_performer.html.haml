@@ -1,0 +1,26 @@
+%table#task_list.table.table-bordered{ style: 'width: 60%;' }
+  %tr
+    %th= t :task
+    %th= t :user
+    %th= t :status
+    %th= t :plan_finish_time
+    %th= t :finish_time
+    %td
+  - @plan.tasks.each do |task|
+    %tr{ id: "show_#{task.id}" }
+      %td= task.task
+      %td= task.user.name
+      %td= task.status
+      %td= make_nice_time(task.plan_finish_time)
+      %td= make_nice_time(task.finish_time)
+      - if task.aquaiant_time
+        - if !task.status
+          %td= link_to t('close'), task_path(id: task.id, project_id: params[:project_id], task: { finish_time: Time.now, status: true, id_plan: params[:id] }), method: :put, class: 'btn'
+        - else 
+          %td= t :closed
+      - else
+        %td= link_to t('aquaiant'), task_path(id: task.id, project_id: params[:project_id], task: { auqaiant_time: Time.now, id_plan: params[:id] }), method: :put, class: 'btn'
+       
+%script
+  =render 'task_list.js'
+
